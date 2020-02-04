@@ -8,7 +8,7 @@ defmodule DagPhxWeb.Router do
   scope "/", DagPhxWeb do
     pipe_through :api
 
-    resources "/users", UserController
+    resources "/users", UserController, only: [:index, :create]
   end
 end
 

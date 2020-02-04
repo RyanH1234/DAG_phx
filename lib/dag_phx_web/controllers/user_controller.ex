@@ -1,38 +1,33 @@
 defmodule DagPhxWeb.UserController do
   use DagPhxWeb, :controller
 
-  # GET /users
+  alias DagPhx.Repo
+  alias DagPhx.User.Data
+  alias DagPhx.Schemas.AppUser
+
   def index(conn, _params) do
-    json(conn, ["index"])
+    users =
+      Data.get_users()
+      |> Repo.all()
+
+    json(conn, users)
   end
 
-  # GET /users/:id/edit
-  def edit(conn, _params) do
-    json(conn, ["edit"])
-  end
+  def create(conn, %{
+        "username" => username,
+        "first_name" => first_name,
+        "last_name" => last_name,
+        "email_address" => email_address
+      }) do
 
-  # GET /users/new
-  def new(conn, _params) do
-    json(conn, ["new"])
-  end
+    user = %AppUser{
+      username: username,
+      first_name: first_name,
+      last_name: last_name,
+      email_address: email_address
+    }
 
-  # GET /users/:id
-  def show(conn, _params) do
-    json(conn, ["show"])
-  end
-
-  # POST /users
-  def create(conn, _params) do
-    json(conn, ["create"])
-  end
-
-  # PATCH/PUT/DELETE /users/:id
-  def update(conn, _params) do
-    json(conn, ["update"])
-  end
-
-  # DELETE /users/:id
-  def delete(conn, _params) do
-    json(conn, ["delete"])
+    {resp, _} = Repo.insert(user)
+    json(conn, resp)
   end
 end

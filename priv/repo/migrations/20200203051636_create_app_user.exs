@@ -8,5 +8,7 @@ defmodule DagPhx.Repo.Migrations.CreateAppUser do
       add :last_name, :string
       add :email_address, :string
     end
+
+    create unique_index(:app_user, [:username])
   end
 end
