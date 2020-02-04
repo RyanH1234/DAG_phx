@@ -1,4 +1,4 @@
-defmodule DagPhx.User.Data do
+defmodule DagPhx.AppUser.Data do
   import Ecto.Query, only: [from: 2]
 
   alias DagPhx.Schemas.AppUser

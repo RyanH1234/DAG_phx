@@ -1,8 +1,8 @@
-defmodule DagPhxWeb.UserController do
+defmodule DagPhxWeb.AppUserController do
   use DagPhxWeb, :controller
 
   alias DagPhx.Repo
-  alias DagPhx.User.Data
+  alias DagPhx.AppUser.Data
   alias DagPhx.Schemas.AppUser
 
   def index(conn, _params) do
