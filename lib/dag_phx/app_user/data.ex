@@ -12,4 +12,12 @@ defmodule DagPhx.AppUser.Data do
         email_address: u.email_address
       }
   end
+
+  def get_user_id(username) do
+    from u in AppUser,
+    where: u.username == ^username,
+    select: %{
+      user_id: u.id
+    }
+  end
 end

@@ -8,7 +8,12 @@ defmodule DagPhxWeb.Router do
   scope "/", DagPhxWeb do
     pipe_through :api
 
-    resources "/users", AppUserController, only: [:index, :create]
+    get "/users", AppUserController, :index
+    post "/users", AppUserController, :create
+    post "/users/username", AppUserController, :retrieve_id
+
+    get "/teams", TeamController, :index
+    post "/teams", TeamController, :create
   end
 end
 

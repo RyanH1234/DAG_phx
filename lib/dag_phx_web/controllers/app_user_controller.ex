@@ -30,4 +30,13 @@ defmodule DagPhxWeb.AppUserController do
     {resp, _} = Repo.insert(user)
     json(conn, resp)
   end
+
+  def retrieve_id(conn, %{"username" => username}) do
+    [%{user_id: user_id}] =
+      username
+      |> Data.get_user_id()
+      |> Repo.all()
+
+    json(conn, [user_id])
+  end
 end
