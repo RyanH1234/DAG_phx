@@ -6,6 +6,6 @@ defmodule DagPhx.Schemas.TeamMember do
 
   schema "team_member" do
     belongs_to :team, Team
-    belongs_to :app_user, AppUser
+    belongs_to :user, AppUser
   end
 end

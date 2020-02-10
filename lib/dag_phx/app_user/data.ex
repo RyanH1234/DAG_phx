@@ -6,6 +6,7 @@ defmodule DagPhx.AppUser.Data do
   def get_users() do
     from u in AppUser,
       select: %{
+        id: u.id,
         username: u.username,
         first_name: u.first_name,
         last_name: u.last_name,
