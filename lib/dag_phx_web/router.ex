@@ -16,12 +16,7 @@ defmodule DagPhxWeb.Router do
     get "/teams", TeamController, :get_teams
     post "/teams", TeamController, :create_team
     post "/teams/members", TeamController, :add_team_members
-
-    # TODO
-    # why do we need options?
-    options "/teams/members/id", TeamController, :retrieve_team_members
     post "/teams/members/id", TeamController, :retrieve_team_members
-
   end
 end
 

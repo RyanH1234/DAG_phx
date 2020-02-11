@@ -39,7 +39,6 @@ defmodule DagPhxWeb.TeamController do
       team_id
       |> Data.get_members()
       |> Repo.all()
-      |> IO.inspect()
 
     json(conn, members)
   end
