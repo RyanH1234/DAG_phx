@@ -14,6 +14,15 @@ defmodule DagPhxWeb.TeamController do
     json(conn, teams)
   end
 
+  def get_team(conn, %{"team_id" => team_id}) do
+    team =
+      team_id
+      |> Data.get_team()
+      |> Repo.all()
+
+    json(conn, team)
+  end
+
   def create_team(conn, %{"team_name" => team_name, "leader_id" => leader_id}) do
     team = %Team{
       team_name: team_name,
@@ -42,4 +51,6 @@ defmodule DagPhxWeb.TeamController do
 
     json(conn, members)
   end
+
+  def options(_conn, _params), do: [:ok]
 end
