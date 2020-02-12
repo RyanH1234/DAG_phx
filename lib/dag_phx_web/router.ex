@@ -15,6 +15,7 @@ defmodule DagPhxWeb.Router do
     post "/users/username", AppUserController, :retrieve_id
 
     get "/teams", TeamController, :get_teams
+
     options "/teams/id", TeamController, :options
     post "/teams/id", TeamController, :get_team
 
@@ -25,6 +26,9 @@ defmodule DagPhxWeb.Router do
 
     options "/teams/members/id", TeamController, :options
     post "/teams/members/id", TeamController, :retrieve_team_members
+
+    get "/cards/genres", CardController, :get_genres
+    post "/cards/genre", CardController, :create_genre
   end
 end
 
