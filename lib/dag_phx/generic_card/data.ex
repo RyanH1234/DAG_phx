@@ -1,4 +1,4 @@
-defmodule DagPhx.Card.Data do
+defmodule DagPhx.GenericCard.Data do
   import Ecto.Query, only: [from: 2]
 
   alias DagPhx.Schemas.CardGenre

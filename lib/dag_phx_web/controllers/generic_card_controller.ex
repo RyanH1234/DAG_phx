@@ -1,8 +1,8 @@
-defmodule DagPhxWeb.CardController do
+defmodule DagPhxWeb.GenericCardController do
   use DagPhxWeb, :controller
 
   alias DagPhx.Repo
-  alias DagPhx.Card.Data
+  alias DagPhx.GenericCard.Data
   alias DagPhx.Schemas.CardGenre
 
   def get_genres(conn, _params) do

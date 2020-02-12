@@ -14,9 +14,10 @@ defmodule DagPhxWeb.TeamController do
     json(conn, teams)
   end
 
-  def get_team(conn, %{"team_id" => team_id}) do
+  def get_team(conn, %{"user_id" => user_id}) do
     team =
-      team_id
+      user_id
+      |> String.to_integer()
       |> Data.get_team()
       |> Repo.all()
 
@@ -43,7 +44,7 @@ defmodule DagPhxWeb.TeamController do
     json(conn, resp)
   end
 
-  def retrieve_team_members(conn, %{"team_id" => team_id}) do
+  def get_team_members(conn, %{"team_id" => team_id}) do
     members =
       team_id
       |> Data.get_members()

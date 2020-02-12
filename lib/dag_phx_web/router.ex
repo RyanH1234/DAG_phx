@@ -6,29 +6,24 @@ defmodule DagPhxWeb.Router do
     plug :accepts, ["json"]
   end
 
-  # TODO - rename these endpoints properly....
   scope "/", DagPhxWeb do
     pipe_through :api
 
-    get "/users", AppUserController, :index
-    post "/users", AppUserController, :create
-    post "/users/username", AppUserController, :retrieve_id
+    get "/users", AppUserController, :get_users
+    post "/users", AppUserController, :create_user
 
     get "/teams", TeamController, :get_teams
-
-    options "/teams/id", TeamController, :options
-    post "/teams/id", TeamController, :get_team
-
     post "/teams", TeamController, :create_team
+    get "/teams/:user_id", TeamController, :get_team
 
-    options "/teams/members", TeamController, :options
+    get "/teams/members/:team_id", TeamController, :get_team_members
     post "/teams/members", TeamController, :add_team_members
 
-    options "/teams/members/id", TeamController, :options
-    post "/teams/members/id", TeamController, :retrieve_team_members
+    get "/generic-cards/genres", GenericCardController, :get_genres
+    post "/generic-cards/genre", GenericCardController, :create_genre
 
-    get "/cards/genres", CardController, :get_genres
-    post "/cards/genre", CardController, :create_genre
+    get "/personal-cards/:team_id", PersonalCardController, :get_cards
+    post "/personal-cards/", PersonalCardController, :create_card
   end
 end
 

@@ -3,7 +3,7 @@ defmodule DagPhx.Schemas.PersonalCard do
 
   alias DagPhx.Schemas.Team
 
-  schema "generic_card" do
+  schema "personal_card" do
     field :name, :string
     field :description, :string
     belongs_to :team, Team
