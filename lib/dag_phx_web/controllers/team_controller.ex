@@ -14,14 +14,22 @@ defmodule DagPhxWeb.TeamController do
     json(conn, teams)
   end
 
-  def get_team(conn, %{"user_id" => user_id}) do
+  def get_users_team(conn, %{"user_id" => user_id}) do
     team =
       user_id
       |> String.to_integer()
-      |> Data.get_team()
+      |> Data.get_users_team()
       |> Repo.all()
 
     json(conn, team)
+  end
+
+  def update_team_name(conn, %{"team_id" => team_id, "team_name" => team_name}) do
+    team_id
+    |> Data.get_team()
+    |> Repo.update_all(set: [team_name: team_name])
+
+    json(conn, "ok")
   end
 
   def create_team(conn, %{"team_name" => team_name, "leader_id" => leader_id}) do

@@ -13,10 +13,11 @@ defmodule DagPhx.Team.Data do
     }
   end
 
-  def get_team(user_id) do
+  def get_users_team(user_id) do
     from tm in TeamMember,
     join: t in Team, on: t.id == tm.team_id,
     where: tm.user_id == ^user_id,
+    order_by: t.id,
     select: %{
       team_id: t.id,
       team_name: t.team_name
@@ -32,5 +33,10 @@ defmodule DagPhx.Team.Data do
       id: tm.id,
       username: u.username
     }
+  end
+
+  def get_team(team_id) do
+    from t in Team,
+    where: t.id == ^team_id
   end
 end
