@@ -16,6 +16,7 @@ defmodule DagPhxWeb.Router do
     post "/teams", TeamController, :create_team
     get "/teams/:user_id", TeamController, :get_users_team
 
+    options "/teams/name/:team_id", TeamController, :options
     patch "/teams/name/:team_id", TeamController, :update_team_name
 
     get "/teams/members/:team_id", TeamController, :get_team_members
