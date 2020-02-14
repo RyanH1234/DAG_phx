@@ -38,8 +38,16 @@ defmodule DagPhxWeb.TeamController do
       leader_id: leader_id
     }
 
-    {resp, _} = Repo.insert(team)
-    json(conn, resp)
+    response = Repo.insert(team)
+
+    case response do
+      {:ok, params} ->
+        %Team{id: team_id} = params
+        json(conn, team_id)
+
+      _ ->
+        json(conn, [:error])
+    end
   end
 
   def add_team_members(conn, %{"team_id" => team_id, "user_id" => user_id}) do
