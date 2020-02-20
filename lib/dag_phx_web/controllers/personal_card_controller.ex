@@ -15,13 +15,22 @@ defmodule DagPhxWeb.PersonalCardController do
   end
 
   def create_card(conn, %{"name" => name, "description" => description, "team_id" => team_id}) do
-    card = %PersonalCard{
+    card = %{
       name: name,
       description: description,
       team_id: team_id
     }
 
-    {resp, _} = Repo.insert(card)
-    json(conn, resp)
+    changeset = PersonalCard.changeset(%PersonalCard{}, card)
+
+    case Repo.insert(changeset) do
+      {:ok, _} ->
+        json(conn, :ok)
+
+      {:error, _} ->
+        json(conn, :error)
+    end
   end
+
+  def options(_conn, _params), do: [:ok]
 end

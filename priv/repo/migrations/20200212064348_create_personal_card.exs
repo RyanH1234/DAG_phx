@@ -7,5 +7,7 @@ defmodule DagPhx.Repo.Migrations.CreatePersonalCard do
       add :description, :string
       add :team_id, references(:team)
     end
+
+    create unique_index(:personal_card, [:name])
   end
 end

@@ -11,8 +11,8 @@ defmodule DagPhx.Schemas.AppUser do
 
   def changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:username, :firstname, :lastname, :email_address])
-    |> validate_required([:username, :firstname, :lastname, :email_address])
+    |> cast(params, [:username, :first_name, :last_name, :email_address])
+    |> validate_required([:username, :first_name, :last_name, :email_address])
     |> unique_constraint(:username)
   end
 end

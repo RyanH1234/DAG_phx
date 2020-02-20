@@ -7,5 +7,7 @@ defmodule DagPhx.Repo.Migrations.CreateGenericCard do
       add :description, :string
       add :genre_id, references(:card_genre)
     end
+
+    create unique_index(:generic_card, [:name])
   end
 end

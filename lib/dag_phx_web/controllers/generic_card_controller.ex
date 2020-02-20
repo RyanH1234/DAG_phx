@@ -12,11 +12,18 @@ defmodule DagPhxWeb.GenericCardController do
   end
 
   def create_genre(conn, %{"genre" => genre}) do
-    genre = %CardGenre{
+    genre = %{
       genre: genre
     }
 
-    {resp, _} = Repo.insert(genre)
-    json(conn, resp)
+    changeset = CardGenre.changeset(%CardGenre{}, genre)
+
+    case Repo.insert(changeset) do
+      {:ok, _} ->
+        json(conn, :ok)
+
+      {:error, _} ->
+        json(conn, :error)
+    end
   end
 end

@@ -20,14 +20,21 @@ defmodule DagPhxWeb.AppUserController do
         "email_address" => email_address
       }) do
 
-    user = %AppUser{
+    user = %{
       username: username,
       first_name: first_name,
       last_name: last_name,
       email_address: email_address
     }
 
-    {resp, _} = Repo.insert(user)
-    json(conn, resp)
+    changeset = AppUser.changeset(%AppUser{}, user)
+
+    case Repo.insert(changeset) do
+      {:ok, _} ->
+        json(conn, :ok)
+
+      {:error, _} ->
+        json(conn, :error)
+    end
   end
 end

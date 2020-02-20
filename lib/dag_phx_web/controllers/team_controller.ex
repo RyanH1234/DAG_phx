@@ -24,6 +24,23 @@ defmodule DagPhxWeb.TeamController do
     json(conn, team)
   end
 
+  def create_team(conn, %{"team_name" => team_name, "leader_id" => leader_id}) do
+    team = %{
+      team_name: team_name,
+      leader_id: leader_id
+    }
+
+    changeset = Team.changeset(%Team{}, team)
+
+    case Repo.insert(changeset) do
+      {:ok, _} ->
+        json(conn, :ok)
+
+      {:error, _} ->
+        json(conn, :error)
+    end
+  end
+
   def update_team_name(conn, %{"team_id" => team_id, "team_name" => team_name}) do
     team_id
     |> Data.get_team()
@@ -32,32 +49,21 @@ defmodule DagPhxWeb.TeamController do
     json(conn, "ok")
   end
 
-  def create_team(conn, %{"team_name" => team_name, "leader_id" => leader_id}) do
-    team = %Team{
-      team_name: team_name,
-      leader_id: leader_id
-    }
-
-    response = Repo.insert(team)
-
-    case response do
-      {:ok, params} ->
-        %Team{id: team_id} = params
-        json(conn, team_id)
-
-      _ ->
-        json(conn, [:error])
-    end
-  end
-
   def add_team_members(conn, %{"team_id" => team_id, "user_id" => user_id}) do
-    team_member = %TeamMember{
+    team_member = %{
       team_id: team_id,
       user_id: user_id
     }
 
-    {resp, _} = Repo.insert(team_member)
-    json(conn, resp)
+    changeset = TeamMember.changeset(%TeamMember{}, team_member)
+
+    case Repo.insert(changeset) do
+      {:ok, _} ->
+        json(conn, :ok)
+
+      {:error, _} ->
+        json(conn, :error)
+    end
   end
 
   def get_team_members(conn, %{"team_id" => team_id}) do
