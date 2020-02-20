@@ -33,8 +33,9 @@ defmodule DagPhxWeb.TeamController do
     changeset = Team.changeset(%Team{}, team)
 
     case Repo.insert(changeset) do
-      {:ok, _} ->
-        json(conn, :ok)
+      {:ok, params} ->
+        %Team{id: team_id} = params
+        json(conn, team_id)
 
       {:error, _} ->
         json(conn, :error)
